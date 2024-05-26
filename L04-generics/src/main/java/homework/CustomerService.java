@@ -12,14 +12,10 @@ public class CustomerService {
     }
 
     public Map.Entry<Customer, String> getSmallest() {
-        Customer smallestCustomer = customerServices.navigableKeySet().stream().findFirst().get();
-        Customer newCustomer = new Customer(smallestCustomer);
-        String smallestData =  customerServices.entrySet().stream().filter(v -> v.getKey().equals(smallestCustomer))
-                .findFirst()
-                .map(v-> v.getValue()).get();
+        Map.Entry<Customer, String> smallestCustomerService = customerServices.firstEntry();
         return new AbstractMap.SimpleEntry<Customer, String>(
-                newCustomer,
-                smallestData);
+                new Customer(smallestCustomerService.getKey()),
+                smallestCustomerService.getValue());
     }
 
     public Map.Entry<Customer, String> getNext(Customer customer) {
