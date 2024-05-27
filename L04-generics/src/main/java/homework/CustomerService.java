@@ -19,17 +19,12 @@ public class CustomerService {
     }
 
     public Map.Entry<Customer, String> getNext(Customer customer) {
-        long customerScores = customer.getScores();
-        Map.Entry<Customer, String> customerService = customerServices.entrySet()
-                .stream()
-                .filter(f -> f.getKey().getScores() > customerScores)
-                .findFirst()
-                .orElse(null);
-        return customerService == null
+        Customer customerNext = customerServices.higherKey(customer);
+        return customerNext == null
             ? null
             : new AbstractMap.SimpleEntry<Customer, String>(
-                new Customer(customerService.getKey()),
-                customerServices.get(customerService.getKey()));
+                new Customer(customerNext),
+                customerServices.get(customerNext));
     }
 
     public void add(Customer customer, String data) {
