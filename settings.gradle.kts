@@ -1,6 +1,7 @@
 rootProject.name = "otusJava"
 include("hw01-gradle")
 include("L04-generics")
+include("L06-annotations")
 
 
 pluginManagement {
